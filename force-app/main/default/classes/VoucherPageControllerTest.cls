@@ -6,18 +6,12 @@ private class VoucherPageControllerTest {
         ContentVersion contentVersion = new ContentVersion(
             Title = 'Test',
             PathOnClient = 'Test.jpg',
+            Expiry_From_Date__c = Date.today(),
+            Expiry_To_Date__c = Date.today().addDays(1),
             VersionData = Blob.valueOf('Test Content')
         );
 
         insert contentVersion;
-
-        Image_Storage__c imageStorage = new Image_Storage__c(
-            Image_Name__c = contentVersion.Title,
-            Expiry_From_Date__c = Date.today(),
-            Expiry_To_Date__c = Date.today().addDays(1)
-        );
-
-        insert imageStorage;
 
         Account testAccount = new Account(
             Name = 'testAccount'
@@ -38,7 +32,7 @@ private class VoucherPageControllerTest {
             Exchange_Rate__c = '0.91',
             Amount__c = 100,
             Note__c = noteLines,
-            Image_Name__c = imageStorage.Image_Name__c,
+            Image_Name__c = contentVersion.Title,
             Credit_Expiry_Date__c = Date.today()
         );
 

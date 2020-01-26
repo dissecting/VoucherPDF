@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Expiry_To_Date__c</fullName>
+    <fullName>Expiry_From_Date__c</fullName>
     <externalId>false</externalId>
-    <label>Expiry To Date</label>
+    <label>Expiry From Date</label>
     <required>true</required>
-    <trackTrending>false</trackTrending>
+    <trackHistory>false</trackHistory>
     <type>Date</type>
 </CustomField>

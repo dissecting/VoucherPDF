@@ -20,45 +20,28 @@ public with sharing class VoucherPageController {
     }
 
     public static String getDocumentUrl() {
-        Id docId;
         String docUrl;
-        List<Image_Storage__c> imageSorageList = VoucherPageController.getImageStorage();
 
-        if (!imageSorageList.isEmpty()) {
-            docId = VoucherPageController.getDocumentId(imageSorageList[0].Image_Name__c);
-        }
-        docUrl = URL_DOCUMENT + docId;
+        docUrl = URL_DOCUMENT + VoucherPageController.getDocumentId();
 
         return docUrl;
     }
 
-    private static List<Image_Storage__c> getImageStorage() {
-        List<Image_Storage__c> imgSorageList = [
-            SELECT Image_Name__c, Expiry_From_Date__c, Expiry_To_Date__c, CreatedDate
-            FROM Image_Storage__c
-            WHERE Image_Name__c = :credit_Memo.Image_Name__c
-                AND Expiry_From_Date__c <= :credit_Memo.Credit_Expiry_Date__c
-                AND Expiry_To_Date__c >= :credit_Memo.Credit_Expiry_Date__c
-            ORDER BY CreatedDate DESC
-            LIMIT 1
-        ];
-
-        return imgSorageList;
-    }
-
-    private static Id getDocumentId(String imageName) {
+    private static Id getDocumentId() {
         Id documentId;
         Set<String> typeSet = new Set<String> {'jpg', 'jpeg', 'png'};
-        List<ContentVersion> documentList = [
-            SELECT FileExtension, Title
+        List<ContentVersion> contentVersionList = [
+            SELECT FileExtension, Title, Expiry_From_Date__c, Expiry_To_Date__c, CreatedDate
             FROM ContentVersion
             WHERE FileExtension IN :typeSet
-                AND Title = :imageName
+                AND Title = :credit_Memo.Image_Name__c
+                AND Expiry_From_Date__c <= :credit_Memo.Credit_Expiry_Date__c
+                AND Expiry_To_Date__c >= :credit_Memo.Credit_Expiry_Date__c
             LIMIT 1
         ];
 
-        if (!documentList.isEmpty()) {
-            documentId = documentList[0].Id;
+        if (!contentVersionList.isEmpty()) {
+            documentId = contentVersionList[0].Id;
         }
 
         return documentId;
