@@ -3,18 +3,16 @@ private class VoucherPageControllerTest {
 
     @testSetup
     private static void setupTestData() {
-        Document document = new Document(
-            Name = 'testDocument',
-            Body = Blob.valueOf('Some Text'),
-            DeveloperName = 'testDocument',
-            FolderId = UserInfo.getUserId(),
-            Type = 'jpg'
+        ContentVersion contentVersion = new ContentVersion(
+            Title = 'Test',
+            PathOnClient = 'Test.jpg',
+            VersionData = Blob.valueOf('Test Content')
         );
 
-        insert document;
+        insert contentVersion;
 
         Image_Storage__c imageStorage = new Image_Storage__c(
-            Image_Name__c = document.DeveloperName,
+            Image_Name__c = contentVersion.Title,
             Expiry_From_Date__c = Date.today(),
             Expiry_To_Date__c = Date.today().addDays(1)
         );
@@ -66,12 +64,12 @@ private class VoucherPageControllerTest {
 
         Test.stopTest();
 
-        List<Document> documentList = [
+        List<ContentVersion> contentVersionList = [
             SELECT Id
-            FROM Document
+            FROM ContentVersion
         ];
 
-        String docUrl = '/servlet/servlet.FileDownload?file=' + documentList[0].Id;
+        String docUrl = '/sfc/servlet.shepherd/version/download/' + contentVersionList[0].Id;
 
         System.assertEquals(docUrl, voucherPageController.documentUrl);
     }

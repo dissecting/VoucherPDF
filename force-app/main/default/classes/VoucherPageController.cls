@@ -1,7 +1,7 @@
 public with sharing class VoucherPageController {
     public String documentUrl { get; set; }
     public Credit_Memo__c creditMemo { get; set; }
-    private static final String URL_DOCUMENT = '/servlet/servlet.FileDownload?file=';
+    private static final String URL_DOCUMENT = '/sfc/servlet.shepherd/version/download/';
     private static Credit_Memo__c credit_Memo;
 
     public VoucherPageController(ApexPages.StandardController controller) {
@@ -49,11 +49,11 @@ public with sharing class VoucherPageController {
     private static Id getDocumentId(String imageName) {
         Id documentId;
         Set<String> typeSet = new Set<String> {'jpg', 'jpeg', 'png'};
-        List<Document> documentList = [
-            SELECT Type, DeveloperName
-            FROM Document
-            WHERE Type IN :typeSet
-                AND DeveloperName = :imageName
+        List<ContentVersion> documentList = [
+            SELECT FileExtension, Title
+            FROM ContentVersion
+            WHERE FileExtension IN :typeSet
+                AND Title = :imageName
             LIMIT 1
         ];
 
