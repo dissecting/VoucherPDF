@@ -1,6 +1,7 @@
 public with sharing class VoucherPageController {
     public String documentUrl { get; set; }
     public Credit_Memo__c creditMemo { get; set; }
+    public Boolean imageIsFound { get; set; }
     private static final String URL_DOCUMENT = '/sfc/servlet.shepherd/version/download/';
     private static Credit_Memo__c credit_Memo;
 
@@ -8,6 +9,7 @@ public with sharing class VoucherPageController {
         VoucherPageController.getCreditMemo();
         creditMemo = credit_Memo;
         documentUrl = VoucherPageController.getDocumentUrl();
+        imageIsFound = !documentUrl.contains('null');
     }
 
     private static void getCreditMemo() {

@@ -91,24 +91,45 @@
                 margin-top: 61%;
                 margin-left: 85%;
             }
+
+            #backgroundMsgId {
+                position: absolute;
+                width: 100%;
+                height: 15%;
+                background-color: red;
+            }
+
+            .errorMsg {
+                position: absolute;
+                margin-left: 10%;
+                font-weight: bold;
+                font-size: 400%;
+            }
         </style>
     </head>
     <body>
-        <img id="imgId" src="{!documentUrl}" alt=""/>
-        <div id="textBlockId">
-            <span class="textValue">travel gift</span>
-            <br></br>
-            <span class="textValue">certificate</span>
-        </div>
-        <span class="textSeparator">|</span>
-        <span class="currencyValue">{!creditMemo.Currency_ISO__c}</span>
-        <span class="amountValue">{!ROUND(creditMemo.Amount__c, 0)}</span>
-        <span class="exclusivelyForText">Exclusively for</span>
-        <span class="exclusivelyForValue">{!BLANKVALUE(creditMemo.Exclusively_For__c, creditMemo.Account__r.Name)}</span>
-        <div id="noteValueId">
-            <apex:outputText value="{!creditMemo.Note__c}" escape="false"/>
-        </div>
-        <span class="voucherNumValue">Voucher No: {!creditMemo.Name}</span>
-        <img id="logoId" src="{!URLFOR($Resource.sfLogo)}" alt=""/>
+        <apex:outputpanel rendered="{!NOT(imageIsFound)}">
+            <div id="backgroundMsgId">
+                <span class="errorMsg">Voucher is not found</span>
+            </div>
+        </apex:outputpanel>
+        <apex:outputpanel rendered="{!imageIsFound}">
+            <img id="imgId" src="{!documentUrl}" alt=""/>
+            <div id="textBlockId">
+                <span class="textValue">travel gift</span>
+                <br></br>
+                <span class="textValue">certificate</span>
+            </div>
+            <span class="textSeparator">|</span>
+            <span class="currencyValue">{!creditMemo.Currency_ISO__c}</span>
+            <span class="amountValue">{!ROUND(creditMemo.Amount__c, 0)}</span>
+            <span class="exclusivelyForText">Exclusively for</span>
+            <span class="exclusivelyForValue">{!BLANKVALUE(creditMemo.Exclusively_For__c, creditMemo.Account__r.Name)}</span>
+            <div id="noteValueId">
+                <apex:outputText value="{!creditMemo.Note__c}" escape="false"/>
+            </div>
+            <span class="voucherNumValue">Voucher No: {!creditMemo.Name}</span>
+            <img id="logoId" src="{!URLFOR($Resource.sfLogo)}" alt=""/>
+        </apex:outputpanel>
     </body>
 </apex:page>
