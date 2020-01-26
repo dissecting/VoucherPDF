@@ -114,7 +114,7 @@
             </div>
         </apex:outputpanel>
         <apex:outputpanel rendered="{!imageIsFound}">
-            <img id="imgId" src="{!documentUrl}" alt=""/>
+            <img id="imgId" src="{!documentUrl}"/>
             <div id="textBlockId">
                 <span class="textValue">travel gift</span>
                 <br></br>
@@ -129,7 +129,7 @@
                 <apex:outputText value="{!creditMemo.Note__c}" escape="false"/>
             </div>
             <span class="voucherNumValue">Voucher No: {!creditMemo.Name}</span>
-            <img id="logoId" src="{!URLFOR($Resource.sfLogo)}" alt=""/>
+            <img id="logoId" src="{!URLFOR($Resource.sfLogo)}"/>
         </apex:outputpanel>
     </body>
 </apex:page>
