@@ -3,7 +3,7 @@
     <fullName>Expiry_From_Date__c</fullName>
     <externalId>false</externalId>
     <label>Expiry From Date</label>
-    <required>true</required>
+    <required>false</required>
     <trackHistory>false</trackHistory>
     <type>Date</type>
 </CustomField>

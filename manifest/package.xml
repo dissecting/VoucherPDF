@@ -25,8 +25,8 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
+		<members>ContentVersion</members>
 		<members>Credit_Memo__c</members>
-		<members>Image_Storage__c</members>
 		<members>NoteSettings__c</members>
 		<name>CustomObject</name>
 	</types>
@@ -34,6 +34,11 @@
 		<members>Credit_Memo__c</members>
 		<members>Image_Storage__c</members>
 		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>ContentVersion-Content Version Layout</members>
+		<members>Credit_Memo__c-Credit%E2%80%8B %E2%80%8BMemo Layout</members>
+		<name>Layout</name>
 	</types>
 	<types>
 		<members>sfLogo</members>
