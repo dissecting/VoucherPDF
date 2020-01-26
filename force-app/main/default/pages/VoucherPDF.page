@@ -1,0 +1,114 @@
+<apex:page standardController="Credit_Memo__c" extensions="VoucherPageController" renderAs="pdf" applyBodyTag="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: A5 landscape;
+                margin: 0;
+                padding: 0;
+            }
+
+            html, body {
+                position: relative;
+                color: white;
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            #imgId {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            #textBlockId {
+                position: absolute;
+                margin-top: 4%;
+                margin-left: 5%;
+            }
+
+            .textValue {
+                font-size: 300%;
+                line-height: 0.9em;
+            }
+
+            .textSeparator {
+                position: absolute;
+                margin-top: 4%;
+                margin-left: 33%;
+                font-size: 470%;
+            }
+
+            .currencyValue {
+                position: absolute;
+                margin-top: 9%;
+                margin-left: 36%;
+                font-size: 120%;
+            }
+
+            .amountValue {
+                position: absolute;
+                margin-top: 5%;
+                margin-left: 37%;
+                font-size: 400%;
+            }
+
+            .exclusivelyForText {
+                position: absolute;
+                margin-top: 17%;
+                margin-left: 5%;
+                font-size: 140%;
+            }
+
+            .exclusivelyForValue {
+                position: absolute;
+                margin-top: 16%;
+                margin-left: 24%;
+                font-size: 190%;
+            }
+
+            #noteValueId {
+                position: absolute;
+                margin-top: 25%;
+                margin-left: 40%;
+                font-size: 110%;
+            }
+
+            .voucherNumValue {
+                position: absolute;
+                font-weight: bold;
+                margin-top: 65%;
+                margin-left: 3%;
+                font-size: 90%;
+            }
+
+            #logoId {
+                position: absolute;
+                width: 10%;
+                height: 10%;
+                margin-top: 61%;
+                margin-left: 85%;
+            }
+        </style>
+    </head>
+    <body>
+        <img id="imgId" src="{!documentUrl}" alt=""/>
+        <div id="textBlockId">
+            <span class="textValue">travel gift</span>
+            <br></br>
+            <span class="textValue">certificate</span>
+        </div>
+        <span class="textSeparator">|</span>
+        <span class="currencyValue">{!creditMemo.Currency_ISO__c}</span>
+        <span class="amountValue">{!ROUND(creditMemo.Amount__c, 0)}</span>
+        <span class="exclusivelyForText">Exclusively for</span>
+        <span class="exclusivelyForValue">{!BLANKVALUE(creditMemo.Exclusively_For__c, creditMemo.Account__r.Name)}</span>
+        <div id="noteValueId">
+            <apex:outputText value="{!creditMemo.Note__c}" escape="false"/>
+        </div>
+        <span class="voucherNumValue">Voucher No: {!creditMemo.Name}</span>
+        <img id="logoId" src="{!URLFOR($Resource.sfLogo)}" alt=""/>
+    </body>
+</apex:page>

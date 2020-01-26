@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorrectDates</fullName>
+    <active>true</active>
+    <errorConditionFormula>Expiry_From_Date__c  &gt;=  Expiry_To_Date__c</errorConditionFormula>
+    <errorMessage>Expiry From Date should be less than Expiry To Date</errorMessage>
+</ValidationRule>
