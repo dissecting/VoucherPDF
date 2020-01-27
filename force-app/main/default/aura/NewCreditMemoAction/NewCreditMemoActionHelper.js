@@ -8,9 +8,9 @@
 
             if (state === "SUCCESS") {
                 createRecordEvent.setParams({
-                    "entityApiName": "Credit_Memo__c",
+                    "entityApiName": "dissecting__Credit_Memo__c",
                     "defaultFieldValues": {
-                        "Note__c" : response.getReturnValue()
+                        "dissecting__Note__c" : response.getReturnValue()
                     }
                 });
                 createRecordEvent.fire();
