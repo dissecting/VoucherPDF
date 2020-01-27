@@ -25,6 +25,11 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
+		<members>Voucher_App</members>
+		<members>Voucher_App_Classic</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
 		<members>ContentVersion</members>
 		<members>Credit_Memo__c</members>
 		<members>NoteSettings__c</members>
