@@ -22,9 +22,7 @@ public with sharing class VoucherPageController {
     }
 
     private static String getDocumentUrl() {
-        String docUrl;
-
-        docUrl = URL_DOCUMENT + VoucherPageController.getDocumentId();
+        String docUrl = URL_DOCUMENT + VoucherPageController.getDocumentId();
 
         return docUrl;
     }
