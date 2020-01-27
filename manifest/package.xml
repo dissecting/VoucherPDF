@@ -32,7 +32,6 @@
 	</types>
 	<types>
 		<members>Credit_Memo__c</members>
-		<members>Image_Storage__c</members>
 		<name>CustomTab</name>
 	</types>
 	<types>
