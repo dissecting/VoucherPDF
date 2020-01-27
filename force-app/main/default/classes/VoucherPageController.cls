@@ -39,6 +39,7 @@ public with sharing class VoucherPageController {
                 AND Title = :credit_Memo.Image_Name__c
                 AND Expiry_From_Date__c <= :credit_Memo.Credit_Expiry_Date__c
                 AND Expiry_To_Date__c >= :credit_Memo.Credit_Expiry_Date__c
+            ORDER BY CreatedDate DESC
             LIMIT 1
         ];
 
