@@ -30,6 +30,10 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomLabels</name>
+	</types>
+	<types>
 		<members>ContentVersion</members>
 		<members>Credit_Memo__c</members>
 		<members>NoteSettings__c</members>
