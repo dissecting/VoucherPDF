@@ -1,15 +1,18 @@
 public with sharing class CreditMemoTriggerHandler {
 
+    private static final String PATTERN_VALUE = Label.noteLinePatternValue;
+
     public static void updateCreditMemo(List<dissecting__Credit_Memo__c> creditMemoNewList, List<dissecting__Credit_Memo__c> creditMemoOldList) {
         Integer creditMemoIndex = 0;
+        CreditMemoTriggerHandler creditMemoTriggerHandler  = new CreditMemoTriggerHandler();
 
         for (dissecting__Credit_Memo__c creditMemo : creditMemoNewList) {
             if (creditMemo.dissecting__Credit_Expiry_Date__c != creditMemoOldList[creditMemoIndex].dissecting__Credit_Expiry_Date__c) {
-                CreditMemoTriggerHandler.correctNoteField(creditMemo);
+                creditMemoTriggerHandler.correctNoteField(creditMemo);
             }
 
             if (creditMemo.dissecting__Currency_ISO__c != creditMemoOldList[creditMemoIndex].dissecting__Currency_ISO__c) {
-                CreditMemoTriggerHandler.correctAmountByExchangeRate(creditMemo);
+                creditMemoTriggerHandler.correctAmountByExchangeRate(creditMemo);
             }
 
             creditMemoIndex++;
@@ -17,42 +20,36 @@ public with sharing class CreditMemoTriggerHandler {
     }
 
     public static void insertCreditMemo(List<dissecting__Credit_Memo__c> creditMemoNewList) {
+        CreditMemoTriggerHandler creditMemoTriggerHandler  = new CreditMemoTriggerHandler();
 
         for (dissecting__Credit_Memo__c creditMemo : creditMemoNewList) {
-            CreditMemoTriggerHandler.correctNoteField(creditMemo);
+            creditMemoTriggerHandler.correctNoteField(creditMemo);
         }
     }
 
-    private static void correctNoteField(dissecting__Credit_Memo__c creditMemoValue) {
-        String patternValue = '<li>Valid for any​ ​new​ ​bookings​ ​made​ ​by';
+    private void correctNoteField(dissecting__Credit_Memo__c creditMemoValue) {
+        String patternValue = '<li>' + PATTERN_VALUE;
         String newLineNoteFormat = '{0} {1}</li></ul>';
         Datetime expiryDate = (Datetime) creditMemoValue.dissecting__Credit_Expiry_Date__c;
         String formatedDate = expiryDate.formatGMT('dd MMMM yyyy');
         Boolean isCorrectNote = creditMemoValue.dissecting__Note__c != null
-            && creditMemoValue.Note__c.contains(patternValue)
-            && !creditMemoValue.Note__c.split(patternValue)[1].contains('<li>');
+            && creditMemoValue.Note__c.contains(patternValue);
+        Boolean isIncorrectNote = creditMemoValue.dissecting__Note__c == null
+            || !creditMemoValue.dissecting__Note__c.contains('<ul><li>');
 
         if (isCorrectNote) {
-            String updatedNoteValue = creditMemoValue.dissecting__Note__c.substring(
-                0,
-                creditMemoValue.dissecting__Note__c.indexOf(patternValue)
-            );
+            String dateNoteValue = creditMemoValue.dissecting__Note__c.substringBetween(patternValue, '</li>');
 
-            updatedNoteValue += CreditMemoTriggerHandler.getLineNoteFormat(
-                newLineNoteFormat,
-                patternValue,
-                formatedDate
-            );
-            creditMemoValue.dissecting__Note__c = updatedNoteValue;
-        } else if (creditMemoValue.dissecting__Note__c == null || !creditMemoValue.dissecting__Note__c.contains('<ul><li>')) {
+            creditMemoValue.dissecting__Note__c = creditMemoValue.dissecting__Note__c.replaceAll(dateNoteValue, ' ' + formatedDate);
+        } else if (isIncorrectNote) {
             newLineNoteFormat = '<ul>' + newLineNoteFormat;
-            creditMemoValue.dissecting__Note__c = CreditMemoTriggerHandler.getLineNoteFormat(
+            creditMemoValue.dissecting__Note__c = this.getLineNoteFormat(
                 newLineNoteFormat,
                 patternValue,
                 formatedDate
             );
         } else if (!creditMemoValue.dissecting__Note__c.contains(patternValue)) {
-            newLineNoteFormat = CreditMemoTriggerHandler.getLineNoteFormat(
+            newLineNoteFormat = this.getLineNoteFormat(
                 newLineNoteFormat,
                 patternValue,
                 formatedDate
@@ -61,7 +58,7 @@ public with sharing class CreditMemoTriggerHandler {
         }
     }
 
-    private static String getLineNoteFormat(String lineFormat, String patternLineValue, String formatedDateValue) {
+    private String getLineNoteFormat(String lineFormat, String patternLineValue, String formatedDateValue) {
         String lineNoteFormat = String.format(lineFormat, new List<Object> {
             patternLineValue,
             formatedDateValue
@@ -70,7 +67,7 @@ public with sharing class CreditMemoTriggerHandler {
         return lineNoteFormat;
     }
 
-    private static void correctAmountByExchangeRate(Credit_Memo__c creditMemoValue) {
+    private void correctAmountByExchangeRate(Credit_Memo__c creditMemoValue) {
 
         try {
             creditMemoValue.dissecting__Amount__c *= Double.valueOf(creditMemoValue.dissecting__Exchange_Rate__c);

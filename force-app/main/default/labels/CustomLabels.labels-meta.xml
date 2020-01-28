@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>noteLinePatternValue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>noteLinePatternValue</shortDescription>
+        <value>Valid for any​ ​new​ ​bookings​ ​made​ ​by</value>
+    </labels>
+</CustomLabels>

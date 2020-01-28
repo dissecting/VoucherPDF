@@ -1,3 +1,11 @@
-<apex:page standardController="dissecting__Credit_Memo__c" extensions="NewCreditMemoController" action="{!overrideRedirect}">
+<apex:page standardController="dissecting__Credit_Memo__c" extensions="NewCreditMemoController">
+    <apex:form>
+        <apex:actionFunction action="{!overrideRedirect}" name="invokeOverrideRedirect"/>
 
+        <script type="text/javascript">
+            window.onload = function() {
+                invokeOverrideRedirect();
+            }
+        </script>
+    </apex:form>
 </apex:page>

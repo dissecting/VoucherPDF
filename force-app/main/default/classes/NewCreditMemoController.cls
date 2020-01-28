@@ -4,8 +4,8 @@ public with sharing class NewCreditMemoController {
 
     public PageReference overrideRedirect() {
         dissecting__NoteSettings__c noteSettings = dissecting__NoteSettings__c.getInstance();
-        String noteLines;
         Schema.DescribeSObjectResult result = dissecting__Credit_Memo__c.sObjectType.getDescribe();
+        String noteLines;
         String keyPrefix = result.getKeyPrefix();
 
         if (noteSettings != null && noteSettings.dissecting__NoteLines__c != null) {
@@ -15,7 +15,7 @@ public with sharing class NewCreditMemoController {
         PageReference prOverride = new PageReference(
             String.format('/{0}/e?{1}={2}&retURL=%2Fa0D%2Fo&nooverride=1', new List<Object> {
                 keyPrefix,
-                NewCreditMemoController.getFieldId(keyPrefix),
+                this.getFieldId(keyPrefix),
                 noteLines
             })
         );
@@ -24,7 +24,7 @@ public with sharing class NewCreditMemoController {
         return prOverride;
     }
 
-    private static PageReference defaultRedirect(String objectPrefix) {
+    private PageReference defaultRedirect(String objectPrefix) {
         PageReference prDefault = new PageReference(
             String.format('/{0}/e?&retURL=%2Fa0D%2Fo&nooverride=1', new List<Object> {objectPrefix})
         );
@@ -33,16 +33,16 @@ public with sharing class NewCreditMemoController {
         return prDefault;
     }
 
-    private static String getFieldId(String objPrefix) {
+    private String getFieldId(String objPrefix) {
         String html;
         String fieldId;
         Blob pageContent;
 
         if (Test.isRunningTest()) {
-            NewCreditMemoController.defaultRedirect(objPrefix);
+            this.defaultRedirect(objPrefix);
             pageContent = Blob.valueOf('Unit.Test');
         } else {
-            pageContent = NewCreditMemoController.defaultRedirect(objPrefix).getContent();
+            pageContent = this.defaultRedirect(objPrefix).getContent();
         }
 
         if (pageContent != null) {

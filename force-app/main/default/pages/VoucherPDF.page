@@ -1,4 +1,4 @@
-<apex:page standardController="dissecting__Credit_Memo__c" extensions="VoucherPageController" renderAs="pdf" applyBodyTag="false">
+<apex:page standardController="Credit_Memo__c" extensions="VoucherPageController" renderAs="pdf" applyBodyTag="false">
     <head>
         <style type="text/css">
             @page {
@@ -9,7 +9,7 @@
 
             html, body {
                 position: relative;
-                color: {!BLANKVALUE(creditMemo.dissecting__Text_Color__c, "white")};
+                color: {!BLANKVALUE(Credit_Memo__c.dissecting__Text_Color__c, "white")};
                 font-family: Verdana, Arial, Helvetica, sans-serif;
                 margin: 0;
                 padding: 0;
@@ -121,16 +121,16 @@
                 <span class="textValue">certificate</span>
             </div>
             <span class="textSeparator">|</span>
-            <span class="currencyValue">{!creditMemo.dissecting__Currency_ISO__c}</span>
-            <span class="amountValue">{!ROUND(creditMemo.dissecting__Amount__c, 0)}</span>
+            <span class="currencyValue">{!Credit_Memo__c.dissecting__Currency_ISO__c}</span>
+            <span class="amountValue">{!ROUND(Credit_Memo__c.dissecting__Amount__c, 0)}</span>
             <span class="exclusivelyForText">Exclusively for</span>
             <span class="exclusivelyForValue">
-                {!BLANKVALUE(creditMemo.dissecting__Exclusively_For__c, creditMemo.dissecting__Account__r.Name)}
+                {!BLANKVALUE(Credit_Memo__c.dissecting__Exclusively_For__c, Credit_Memo__c.dissecting__Account__r.Name)}
             </span>
             <div id="noteValueId">
-                <apex:outputText value="{!creditMemo.dissecting__Note__c}" escape="false"/>
+                <apex:outputText value="{!Credit_Memo__c.Note__c}" escape="false"/>
             </div>
-            <span class="voucherNumValue">Voucher No: {!creditMemo.Name}</span>
+            <span class="voucherNumValue">Voucher No: {!Credit_Memo__c.Name}</span>
             <img id="logoId" src="{!URLFOR($Resource.sfLogo)}"/>
         </apex:outputpanel>
     </body>

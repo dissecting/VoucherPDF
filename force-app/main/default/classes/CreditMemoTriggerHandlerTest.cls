@@ -55,7 +55,7 @@ private class CreditMemoTriggerHandlerTest {
 
         Datetime expiryDate = (Datetime) Date.today();
         String formatedDate = expiryDate.format('dd MMMM yyyy');
-        String newLineNote = '<li>Valid for any​ ​new​ ​bookings​ ​made​ ​by ' + formatedDate;
+        String newLineNote = Label.noteLinePatternValue + ' ' + formatedDate;
         Boolean isContained = false;
 
         List<dissecting__Credit_Memo__c> creditMemoList = [
@@ -91,7 +91,7 @@ private class CreditMemoTriggerHandlerTest {
         Date newDate = Date.today().addDays(1);
         Datetime expiryDate = (Datetime) newDate;
         String formatedDate = expiryDate.format('dd MMMM yyyy');
-        String newLineNote = '<li>Valid for any​ ​new​ ​bookings​ ​made​ ​by ' + formatedDate;
+        String newLineNote = Label.noteLinePatternValue + ' ' + formatedDate;
         Boolean isContained = false;
 
         List<dissecting__Credit_Memo__c> newCreditMemoList = [
@@ -129,7 +129,7 @@ private class CreditMemoTriggerHandlerTest {
         Date newDate = Date.today().addDays(1);
         Datetime expiryDate = (Datetime) newDate;
         String formatedDate = expiryDate.format('dd MMMM yyyy');
-        String newLineNote = '<li>Valid for any​ ​new​ ​bookings​ ​made​ ​by ' + formatedDate;
+        String newLineNote = Label.noteLinePatternValue + ' ' + formatedDate;
         Boolean isContained = false;
 
         List<dissecting__Credit_Memo__c> newCreditMemoList = [
