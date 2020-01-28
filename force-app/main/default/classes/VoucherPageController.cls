@@ -1,9 +1,9 @@
 public with sharing class VoucherPageController {
     public String documentUrl { get; set; }
-    public Credit_Memo__c creditMemo { get; set; }
+    public dissecting__Credit_Memo__c creditMemo { get; set; }
     public Boolean imageIsFound { get; set; }
     private static final String URL_DOCUMENT = '/sfc/servlet.shepherd/version/download/';
-    private static Credit_Memo__c credit_Memo;
+    private static dissecting__Credit_Memo__c credit_Memo;
 
     public VoucherPageController(ApexPages.StandardController controller) {
         VoucherPageController.getCreditMemo();
@@ -31,12 +31,12 @@ public with sharing class VoucherPageController {
         Id documentId;
         Set<String> typeSet = new Set<String> {'jpg', 'jpeg', 'png'};
         List<ContentVersion> contentVersionList = [
-            SELECT FileExtension, Title, Expiry_From_Date__c, Expiry_To_Date__c, CreatedDate
+            SELECT FileExtension, Title, dissecting__Expiry_From_Date__c, dissecting__Expiry_To_Date__c, CreatedDate
             FROM ContentVersion
             WHERE FileExtension IN :typeSet
                 AND Title = :credit_Memo.Image_Name__c
-                AND Expiry_From_Date__c <= :credit_Memo.Credit_Expiry_Date__c
-                AND Expiry_To_Date__c >= :credit_Memo.Credit_Expiry_Date__c
+                AND dissecting__Expiry_From_Date__c <= :credit_Memo.Credit_Expiry_Date__c
+                AND dissecting__Expiry_To_Date__c >= :credit_Memo.Credit_Expiry_Date__c
             ORDER BY CreatedDate DESC
             LIMIT 1
         ];

@@ -6,8 +6,8 @@ private class VoucherPageControllerTest {
         ContentVersion contentVersion = new ContentVersion(
             Title = 'Test',
             PathOnClient = 'Test.jpg',
-            Expiry_From_Date__c = Date.today(),
-            Expiry_To_Date__c = Date.today().addDays(1),
+            dissecting__Expiry_From_Date__c = Date.today(),
+            dissecting__Expiry_To_Date__c = Date.today().addDays(1),
             VersionData = Blob.valueOf('Test Content')
         );
 
@@ -20,20 +20,20 @@ private class VoucherPageControllerTest {
         insert testAccount;
 
         String noteLines = '<ul><li>Valid for these countries</li><li>Valid for</li><li>Valid for</li></ul>';
-        NoteSettings__c noteSettings = new NoteSettings__c (
-            NoteLines__c = noteLines
+        dissecting__NoteSettings__c noteSettings = new dissecting__NoteSettings__c (
+            dissecting__NoteLines__c = noteLines
         );
 
         insert noteSettings;
 
-        Credit_Memo__c creditMemo = new Credit_Memo__c(
-            Account__c = testAccount.Id,
-            Currency_ISO__c = '$',
-            Exchange_Rate__c = '0.91',
-            Amount__c = 100,
-            Note__c = noteLines,
-            Image_Name__c = contentVersion.Title,
-            Credit_Expiry_Date__c = Date.today()
+        dissecting__Credit_Memo__c creditMemo = new dissecting__Credit_Memo__c(
+            dissecting__Account__c = testAccount.Id,
+            dissecting__Currency_ISO__c = '$',
+            dissecting__Exchange_Rate__c = '0.91',
+            dissecting__Amount__c = 100,
+            dissecting__Note__c = noteLines,
+            dissecting__Image_Name__c = contentVersion.Title,
+            dissecting__Credit_Expiry_Date__c = Date.today()
         );
 
         insert creditMemo;
@@ -41,10 +41,10 @@ private class VoucherPageControllerTest {
 
     @isTest
     private static void testVoucher() {
-        List<Credit_Memo__c> creditMemoList = [
-            SELECT Amount__c
-            FROM Credit_Memo__c
-            WHERE Amount__c = 100
+        List<dissecting__Credit_Memo__c> creditMemoList = [
+            SELECT dissecting__Amount__c
+            FROM dissecting__Credit_Memo__c
+            WHERE dissecting__Amount__c = 100
         ];
 
         PageReference pageRef = ApexPages.currentPage();

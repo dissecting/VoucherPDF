@@ -3,11 +3,11 @@ public with sharing class NewCreditMemoController {
     public NewCreditMemoController(ApexPages.StandardController controller) {}
 
     public PageReference overrideRedirect() {
-        NoteSettings__c noteSettings = NoteSettings__c.getInstance();
+        dissecting__NoteSettings__c noteSettings = dissecting__NoteSettings__c.getInstance();
         String noteLines;
 
-        if (noteSettings != null && noteSettings.NoteLines__c != null) {
-            noteLines = noteSettings.NoteLines__c;
+        if (noteSettings != null && noteSettings.dissecting__NoteLines__c != null) {
+            noteLines = noteSettings.dissecting__NoteLines__c;
         }
 
         PageReference prOverride = new PageReference(

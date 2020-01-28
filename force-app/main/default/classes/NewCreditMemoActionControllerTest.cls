@@ -4,8 +4,8 @@ private class NewCreditMemoActionControllerTest {
     @testSetup
     private static void setupTestData() {
         String noteLines = '<ul><li>Valid for these countries</li><li>Valid for</li><li>Valid for</li></ul>';
-        NoteSettings__c noteSettings = new NoteSettings__c (
-            NoteLines__c = noteLines
+        dissecting__NoteSettings__c noteSettings = new dissecting__NoteSettings__c (
+            dissecting__NoteLines__c = noteLines
         );
 
         insert noteSettings;
@@ -13,8 +13,8 @@ private class NewCreditMemoActionControllerTest {
 
     @isTest
     private static void testGetNoteSettings() {
-        NoteSettings__c noteSettings = NoteSettings__c.getInstance();
-        String preparedNoteLines = noteSettings.NoteLines__c;
+        dissecting__NoteSettings__c noteSettings = dissecting__NoteSettings__c.getInstance();
+        String preparedNoteLines = noteSettings.dissecting__NoteLines__c;
         String actualNoteLines;
 
         Test.startTest();

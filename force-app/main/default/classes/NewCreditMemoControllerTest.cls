@@ -4,8 +4,8 @@ private class NewCreditMemoControllerTest {
     @testSetup
     private static void setupTestData() {
         String noteLines = '<ul><li>Valid for these countries</li><li>Valid for</li><li>Valid for</li></ul>';
-        NoteSettings__c noteSettings = new NoteSettings__c (
-            NoteLines__c = noteLines
+        dissecting__NoteSettings__c noteSettings = new dissecting__NoteSettings__c (
+            dissecting__NoteLines__c = noteLines
         );
 
         insert noteSettings;
@@ -13,7 +13,7 @@ private class NewCreditMemoControllerTest {
 
     @isTest
     private static void testOverrideRedirect() {
-        ApexPages.StandardController sc = new ApexPages.StandardController(new Credit_Memo__c());
+        ApexPages.StandardController sc = new ApexPages.StandardController(new dissecting__Credit_Memo__c());
         NewCreditMemoController newCreditMemoController = new NewCreditMemoController(sc);
         PageReference pageRef = ApexPages.currentPage();
         Test.setCurrentPageReference(pageRef);
