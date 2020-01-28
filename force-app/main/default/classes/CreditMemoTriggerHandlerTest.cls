@@ -26,6 +26,10 @@ private class CreditMemoTriggerHandlerTest {
         );
 
         insert creditMemo;
+
+        System.assertNotEquals(null, testAccount.Id, 'Record is not created');
+        System.assertNotEquals(null, noteSettings.Id, 'Record is not created');
+        System.assertNotEquals(null, creditMemo.Id, 'Record is not created');
     }
 
     @isTest

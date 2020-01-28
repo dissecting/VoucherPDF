@@ -9,6 +9,8 @@ private class NewCreditMemoControllerTest {
         );
 
         insert noteSettings;
+
+        System.assertNotEquals(null, noteSettings.Id, 'Record is not created');
     }
 
     @isTest
