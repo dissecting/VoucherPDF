@@ -42,7 +42,7 @@ private class VoucherPageControllerTest {
     @isTest
     private static void testVoucher() {
         List<dissecting__Credit_Memo__c> creditMemoList = [
-            SELECT dissecting__Amount__c
+            SELECT dissecting__Amount__c, dissecting__Credit_Expiry_Date__c, dissecting__Image_Name__c
             FROM dissecting__Credit_Memo__c
             WHERE dissecting__Amount__c = 100
         ];

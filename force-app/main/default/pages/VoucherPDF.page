@@ -128,7 +128,7 @@
                 {!BLANKVALUE(Credit_Memo__c.dissecting__Exclusively_For__c, Credit_Memo__c.dissecting__Account__r.Name)}
             </span>
             <div id="noteValueId">
-                <apex:outputText value="{!Credit_Memo__c.Note__c}" escape="false"/>
+                <apex:outputText value="{!Credit_Memo__c.dissecting__Note__c}" escape="false"/>
             </div>
             <span class="voucherNumValue">Voucher No: {!Credit_Memo__c.Name}</span>
             <img id="logoId" src="{!URLFOR($Resource.sfLogo)}"/>

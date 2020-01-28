@@ -16,7 +16,7 @@
                 createRecordEvent.fire();
             } else if (state === "ERROR") {
                 var errors = response.getError();
-                console.error(errors);
+                alert(errors);
             }
         });
         $A.enqueueAction(action);
