@@ -51,7 +51,7 @@
             .amountValue {
                 position: absolute;
                 margin-top: 5%;
-                margin-left: 37%;
+                margin-left: 38%;
                 font-size: 400%;
             }
 
