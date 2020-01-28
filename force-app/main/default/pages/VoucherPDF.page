@@ -9,7 +9,7 @@
 
             html, body {
                 position: relative;
-                color: white;
+                color: {!BLANKVALUE(creditMemo.Text_Color__c, "white")};
                 font-family: Verdana, Arial, Helvetica, sans-serif;
                 margin: 0;
                 padding: 0;

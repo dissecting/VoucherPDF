@@ -14,9 +14,9 @@ public with sharing class VoucherPageController {
 
     private static void getCreditMemo() {
         VoucherPageController.credit_Memo = [
-            SELECT Image_Name__c, Credit_Expiry_Date__c, Exclusively_For__c, Account__r.Name,
-                Amount__c, Currency_ISO__c, Name, Note__c
-            FROM Credit_Memo__c
+            SELECT dissecting__Image_Name__c, dissecting__Credit_Expiry_Date__c, dissecting__Exclusively_For__c, dissecting__Account__r.Name,
+                dissecting__Amount__c, dissecting__Currency_ISO__c, Name, dissecting__Note__c, dissecting__Text_Color__c
+            FROM dissecting__Credit_Memo__c
             WHERE Id = :ApexPages.currentPage().getParameters().get('id')
         ];
     }
