@@ -5,14 +5,17 @@ public with sharing class NewCreditMemoController {
     public PageReference overrideRedirect() {
         dissecting__NoteSettings__c noteSettings = dissecting__NoteSettings__c.getInstance();
         String noteLines;
+        Schema.DescribeSObjectResult result = dissecting__Credit_Memo__c.sObjectType.getDescribe();
+        String keyPrefix = result.getKeyPrefix();
 
         if (noteSettings != null && noteSettings.dissecting__NoteLines__c != null) {
             noteLines = noteSettings.dissecting__NoteLines__c;
         }
 
         PageReference prOverride = new PageReference(
-            String.format('/a0D/e?{0}={1}&retURL=%2Fa0D%2Fo&nooverride=1', new List<Object> {
-                NewCreditMemoController.getFieldId(),
+            String.format('/{0}/e?{1}={2}&retURL=%2Fa0D%2Fo&nooverride=1', new List<Object> {
+                keyPrefix,
+                NewCreditMemoController.getFieldId(keyPrefix),
                 noteLines
             })
         );
@@ -21,23 +24,25 @@ public with sharing class NewCreditMemoController {
         return prOverride;
     }
 
-    private static PageReference defaultRedirect() {
-        PageReference prDefault = new PageReference('/a0D/e?retURL=%2Fa0D%2Fo&nooverride=1');
+    private static PageReference defaultRedirect(String objectPrefix) {
+        PageReference prDefault = new PageReference(
+            String.format('/{0}/e?&retURL=%2Fa0D%2Fo&nooverride=1', new List<Object> {objectPrefix})
+        );
         prDefault.setRedirect(true);
 
         return prDefault;
     }
 
-    private static String getFieldId() {
+    private static String getFieldId(String objPrefix) {
         String html;
         String fieldId;
         Blob pageContent;
 
         if (Test.isRunningTest()) {
-            NewCreditMemoController.defaultRedirect();
+            NewCreditMemoController.defaultRedirect(objPrefix);
             pageContent = Blob.valueOf('Unit.Test');
         } else {
-            pageContent = NewCreditMemoController.defaultRedirect().getContent();
+            pageContent = NewCreditMemoController.defaultRedirect(objPrefix).getContent();
         }
 
         if (pageContent != null) {
