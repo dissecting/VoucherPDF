@@ -27,7 +27,7 @@ public with sharing class CreditMemoTriggerHandler {
         String patternValue = '<li>Valid for any​ ​new​ ​bookings​ ​made​ ​by';
         String newLineNoteFormat = '{0} {1}</li></ul>';
         Datetime expiryDate = (Datetime) creditMemoValue.Credit_Expiry_Date__c;
-        String formatedDate = expiryDate.format('dd MMMM yyyy');
+        String formatedDate = expiryDate.formatGMT('dd MMMM yyyy');
         Boolean isCorrectNote = creditMemoValue.Note__c != null
             && creditMemoValue.Note__c.contains(patternValue)
             && !creditMemoValue.Note__c.split(patternValue)[1].contains('<li>');
