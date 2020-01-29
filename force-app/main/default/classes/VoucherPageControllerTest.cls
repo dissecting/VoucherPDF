@@ -68,7 +68,7 @@ private class VoucherPageControllerTest {
             FROM ContentVersion
         ];
 
-        String docUrl = '/sfc/servlet.shepherd/version/download/' + contentVersionList[0].Id;
+        String docUrl = '/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpg&versionId=' + contentVersionList[0].Id;
 
         System.assertEquals(docUrl, voucherPageController.documentUrl);
     }

@@ -13,6 +13,7 @@
                         "dissecting__Note__c" : response.getReturnValue()
                     }
                 });
+
                 createRecordEvent.fire();
             } else if (state === "ERROR") {
                 var errors = response.getError();

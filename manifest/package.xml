@@ -21,6 +21,7 @@
 		<name>ApexTrigger</name>
 	</types>
 	<types>
+		<members>ImagePreviewAction</members>
 		<members>NewCreditMemoAction</members>
 		<name>AuraDefinitionBundle</name>
 	</types>

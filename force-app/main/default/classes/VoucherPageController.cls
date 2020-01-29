@@ -1,7 +1,7 @@
 public with sharing class VoucherPageController {
     public String documentUrl { get; set; }
     public Boolean imageIsFound { get; set; }
-    private static final String URL_DOCUMENT = '/sfc/servlet.shepherd/version/download/';
+    private static final String URL_DOCUMENT = '/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpg&versionId=';
     private static dissecting__Credit_Memo__c creditMemo;
 
     public VoucherPageController(ApexPages.StandardController controller) {
