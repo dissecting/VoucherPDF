@@ -1,5 +1,7 @@
 ({
     handleInit : function(component, event) {
+        component.set("v.componentURL", window.location.href);
+
         var createRecordEvent = $A.get("e.force:createRecord");
         var action = component.get("c.getNoteSettings");
 
@@ -21,5 +23,19 @@
             }
         });
         $A.enqueueAction(action);
+    },
+
+    handleUpdate : function(component, event) {
+        component.set("v.modalURL", window.location.href);
+
+        var componentURL = component.get("v.componentURL");
+        var modalURL = component.get("v.modalURL");
+
+        if (componentURL === modalURL) {
+            var redirectURL = componentURL.substring(0, componentURL.indexOf("dissecting__Credit_Memo__c"));
+
+            redirectURL += "dissecting__Credit_Memo__c/home";
+            window.location.href = redirectURL;
+        }
     }
 })

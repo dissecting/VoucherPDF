@@ -1,3 +1,6 @@
 <aura:component controller="dissecting.NewCreditMemoActionController" implements="lightning:actionOverride" access="global">
+    <aura:attribute name="componentURL" type="String"/>
+    <aura:attribute name="modalURL" type="String"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:locationChange" action="{!c.doUpdate}"/>
 </aura:component>
