@@ -4,6 +4,6 @@
         var recordId = component.get("v.recordId");
 
         closeQuickAction.fire();
-        window.location.href = '/apex/ImagePreviewPage?scontrolCaching=1&id=' + recordId;
+        window.location.href = '/apex/dissecting__ImagePreviewPage?scontrolCaching=1&id=' + recordId;
     }
 })
