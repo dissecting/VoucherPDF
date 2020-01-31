@@ -50,6 +50,10 @@
 		<name>Layout</name>
 	</types>
 	<types>
+		<members>dissecting__Credit_Memo__c.Image_Preview_Action</members>
+		<name>QuickAction</name>
+	</types>
+	<types>
 		<members>sfLogo</members>
 		<name>StaticResource</name>
 	</types>
